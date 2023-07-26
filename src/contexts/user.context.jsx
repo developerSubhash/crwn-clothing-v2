@@ -19,7 +19,6 @@ export function UserProvider({ children }) {
     const unsubcribe = onAuthStateChangedListener(function (user) {
       if (!user) createUserDocumentFromAuth(user);
 
-      console.log(user);
       setCurrentUser(user);
     });
 
