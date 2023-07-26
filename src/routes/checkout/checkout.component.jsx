@@ -1,7 +1,7 @@
 import { CartDropdownContext } from "../../contexts/cart-dropdown.context";
 import { useContext } from "react";
 
-import CheckoutCartItem from "../checkout-cart-item/checkout-cart-item.component";
+import CheckoutCartItem from "../../components/checkout-cart-item/checkout-cart-item.component";
 
 import "./checkout.styles.scss";
 

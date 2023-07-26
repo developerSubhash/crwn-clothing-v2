@@ -10,7 +10,14 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  writeBatch,
+  collection,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAk6t53Z23Ru-K-JEj0E_M2gsl5QoacCbA",
@@ -37,6 +44,26 @@ export const signInWithGoogleRedirect = function () {
 };
 
 export const db = getFirestore();
+
+//* Storing all the shopping items to Firestore database.
+
+export const addCollectionsAndDocuments = async function (
+  collectionKey,
+  objectsToAdd
+) {
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+
+  objectsToAdd.forEach((object) => {
+    const documentRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(documentRef, object);
+  });
+
+  await batch.commit();
+  console.log("done");
+};
+
+/////////////////////////////////////////////////////////
 
 export const createUserDocumentFromAuth = async function (
   userAuth,
