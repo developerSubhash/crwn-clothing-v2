@@ -17,6 +17,8 @@ import {
   setDoc,
   writeBatch,
   collection,
+  query,
+  getDocs,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -61,6 +63,25 @@ export const addCollectionsAndDocuments = async function (
 
   await batch.commit();
   console.log("done");
+};
+
+/////////////////////////////////////////////////////////
+
+//* Fetching Shopping Products data form Firestore database.
+
+export const getCategoriesAndDocuments = async function () {
+  const collectionRef = collection(db, "categories");
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+
+  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+    const { title, items } = docSnapshot.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+
+  return categoryMap;
 };
 
 /////////////////////////////////////////////////////////

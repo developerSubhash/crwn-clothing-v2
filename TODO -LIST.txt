@@ -1,0 +1,8 @@
+1 => Need to fix the styling in the navigaltion component of crown logo.
+
+
+2 => need to fix when you sign up with google link and then a pop up appears to sign-up, but if you
+     close the popup, then a error occurs. So need to fix that as well.
+
+
+3 => fix the svg styling in cat-icon-component.jsx

@@ -1,10 +1,17 @@
-import Button from "../button/button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
 import { useContext } from "react";
 
 import { CartDropdownContext } from "../../contexts/cart-dropdown.context";
 
-import "./products-card.styles.scss";
+// import "./products-card.styles.scss";
+
+import {
+  ProductCardContainer,
+  Footer,
+  ProductName,
+  ProductPrice,
+} from "./products-card.styles";
 
 function ProductCard({ product }) {
   const { name, price, id, imageUrl } = product;
@@ -15,16 +22,19 @@ function ProductCard({ product }) {
   }
 
   return (
-    <div className="product-card-container" key={id}>
+    <ProductCardContainer key={id}>
       <img src={imageUrl} alt={name} />
-      <div className="footer">
-        <span className="name">{name}</span>
-        <span className="price">{price}</span>
-      </div>
-      <Button buttonType="inverted" onClick={addProductToCart}>
+      <Footer>
+        <ProductName>{name}</ProductName>
+        <ProductPrice>{price}</ProductPrice>
+      </Footer>
+      <Button
+        buttonType={BUTTON_TYPE_CLASSES.inverted}
+        onClick={addProductToCart}
+      >
         ADD TO CART
       </Button>
-    </div>
+    </ProductCardContainer>
   );
 }
 
